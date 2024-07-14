@@ -48,7 +48,7 @@ export default function PalettePage() {
                         community or even create your own.
                     </p>
                     <p className="w-full lg:w-7/12 text-justify mx-auto">
-                        You can export the generated palette to your <code>tailwind.config.ts</code> file or to you shadcn variables settings on your <code>style.css</code>, and <strong>it's free</strong>
+                        You can export the generated palette to your <code>tailwind.config.ts</code> file or to you shadcn variables settings on your <code>style.css</code>, and <strong>it&apos;s free</strong>
                     </p>
                     <div className="w-fit mx-auto flex flex-col gap-y-4">
                         <h2 className="text-2xl font-bold">Create your own Palettes</h2>
