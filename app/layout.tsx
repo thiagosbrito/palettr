@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils"
 import {ThemeProvider} from "@/providers/theme-provider";
 import React from "react";
+import HomeWrapper from "@/components/layout/home";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -34,7 +35,9 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        >{children}</ThemeProvider>
+        >
+          <HomeWrapper>{children}</HomeWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

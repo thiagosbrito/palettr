@@ -6,7 +6,7 @@ import {ModeToggle} from "@/components/layout/theme-toggle";
 
 export default function Header() {
     return (
-        <div className="w-full h-20 px-6 flex flex-row items-center justify-between">
+        <div className="w-full h-20 px-6 flex flex-row items-center justify-between sticky shadow-2xl shadow-black/5">
             <div className="">
                 <Image
                     src="svg/logo_only.svg"
@@ -20,7 +20,7 @@ export default function Header() {
                     <li>
                         <Link
                             className="font-sans font-semibold text-lg"
-                            href={"/"}
+                            href={"/palette"}
                         >
                             Color Palette
                         </Link>
@@ -28,7 +28,7 @@ export default function Header() {
                     <li>
                         <Link
                             className="font-sans font-semibold text-lg"
-                            href={"/"}
+                            href={"/gradient"}
                         >
                             Generate Gradient
                         </Link>

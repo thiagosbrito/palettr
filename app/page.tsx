@@ -10,15 +10,14 @@ import Header from "@/components/layout/header";
 export default function Home() {
     const { theme } = useTheme();
     return (
-        <div className="h-screen w-screen flex flex-col">
-            <Header />
+        <>
             <div className="flex-1 flex flex-col items-center justify-center gap-y-6">
                 <div className="flex flex-col gap-y-6 text-center">
                     <h1 className="font-sans font-bold text-4xl">
                         Welcome to
-                        <span className="ml-2 font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-br from-orange-400 to-pink-600">Palettr</span>
+                        <span className="ml-2 font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-br from-orange-400 to-pink-600">Palettr</span>
                     </h1>
-                    <p>Generate Tailwindcss color palette and export to your <code className="bg-background px-1 py-0.5">tailwind.config.ts</code></p>
+                    <p className="text-lg">Generate Tailwindcss color palette and export to your <code className="bg-background text-base px-1 py-0.5">tailwind.config.ts</code></p>
                 </div>
                 <div className="flex flex-row items-center">
                     <Button className="uppercase gap-x-2 font-semibold">
@@ -33,6 +32,7 @@ export default function Home() {
                     <span className="text-blue-300 ml-1 font-semibold">@brito_dev</span>
                 </div>
             </div>
-        </div>
+        </>
+
     );
 }
