@@ -90,7 +90,7 @@ export default function PalettePage() {
                     <div className="w-full min-h-20 rounded-xl">
                         {colorPalette.length === 0 && <div className="w-full min-h-20 items-center justify-center flex">Please select a base color first.</div>}
                         {colorPalette.length > 0 && (
-                            <div className="w-full min-h-20 grid grid-cols-11 gap-x-1">
+                            <div className="w-full min-h-20 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 xl:grid-cols-11 gap-x-1">
                                 {colorPalette.map((color, index) => (
                                     <div key={index} className={`border rounded-md flex items-center justify-center h-20 text-white`} style={{ backgroundColor: color }}>{color}</div>                                ))}
                             </div>
