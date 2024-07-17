@@ -6,9 +6,11 @@ import {Button} from "@/components/ui/button";
 import {ArrowRight, GithubIcon} from "lucide-react";
 import {useTheme} from "next-themes";
 import Header from "@/components/layout/header";
+import {useRouter} from "next/navigation";
 
 export default function Home() {
     const { theme } = useTheme();
+    const router = useRouter();
     return (
         <>
             <div className="flex-1 flex flex-col items-center justify-center gap-y-6">
@@ -20,7 +22,7 @@ export default function Home() {
                     <p className="text-lg">Generate Tailwindcss color palette and export to your <code className="bg-background text-base px-1 py-0.5">tailwind.config.ts</code></p>
                 </div>
                 <div className="flex flex-row items-center">
-                    <Button className="uppercase gap-x-2 font-semibold">
+                    <Button className="uppercase gap-x-2 font-semibold" onClick={() => router.push("/palette")}>
                         get started
                         <ArrowRight size={18} />
                     </Button>

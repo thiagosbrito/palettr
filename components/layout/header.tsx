@@ -36,14 +36,14 @@ export default function Header() {
                 </ul>
             </nav>
             <div className="flex flex-row gap-x-3">
-                <Button
-                    className="gap-x-2"
-                >
-                    <GithubIcon size={18}/>
-                    <span className="hidden md:inline-block">
-                        Sign In with GitHub
-                    </span>
-                </Button>
+                {/*<Button*/}
+                {/*    className="gap-x-2"*/}
+                {/*>*/}
+                {/*    <GithubIcon size={18}/>*/}
+                {/*    <span className="hidden md:inline-block">*/}
+                {/*        Sign In with GitHub*/}
+                {/*    </span>*/}
+                {/*</Button>*/}
                 <ModeToggle/>
             </div>
         </div>
