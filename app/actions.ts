@@ -1,7 +1,46 @@
 'use server';
 
+import { createOpenAI } from '@ai-sdk/openai';
+// import { createAnthropic } from '@ai-sdk/anthropic';
 import { google } from '@ai-sdk/google';
+import {createGoogleGenerativeAI } from '@ai-sdk/google';
 import { generateText } from "ai";
+import { OpenAI } from 'openai'
+// const openai = createOpenAI({
+//     compatibility: 'strict',
+//     apiKey: process.env.OPENAI_API_KEY
+// });
+
+// const anthropic = createAnthropic({
+//     apiKey: process.env.ANTHROPIC_API_KEY
+// });
+
+const openai = new OpenAI({
+    apiKey: process.env.AIML_API_KEY,
+    baseURL: "https://api.aimlapi.com/",
+})
+interface Shade {
+    hex: string;
+    name?: string;
+}
+
+const getColorName = async (color: string) => {
+    const response = await fetch('https://api.aimlapi.com/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Bearer ${process.env.AIML_API_KEY}`
+        },
+        body: JSON.stringify({
+            model: 'cognitivecomputations/dolphin-2.5-mixtral-8x7b',
+            prompt: `
+                Generate one single creative and descriptive name for the color ${color}.
+                The name should be short (1-2 words) separated by a hyphen, in American English.
+                Respond with only the name.
+            `
+        })
+    })
+}
 
 const hexToHSL = (hex: string) => {
     console.log(hex);
@@ -65,39 +104,27 @@ const generateShades = (baseColor: string) => {
     return shades;
 };
 
-export async function generatePalette(baseColor: any) {
-    const shades = generateShades(baseColor);
-
-    // Generate names for all shades in a single API call
-    const hexValues = Object.values(shades).map((shade: any) => shade.hex);
-    const prompt = `Generate creative and descriptive names for the following colors (hex values): ${hexValues.join(', ')}. Each name should be short (1 word) and evocative. Return the names as a comma-separated list, in the same order as the input colors.`;
+export async function generatePaletteName(baseColor: string): Promise<{ text: string }> {
+    const prompt = `
+        Generate one single creative and descriptive name for the color ${baseColor}. 
+        The name should be short (1-2 words) separated by a hyphen, in American English. 
+        Respond with only the name.
+    `;
 
     try {
-        const { text } = await generateText({
-            model: google('models/gemini-pro'),
-            prompt: prompt
+        const { choices } = await openai.chat.completions.create({
+            model: 'gpt-4o',
+            messages: [{'role': 'user', 'content': prompt}],
         })
 
-        if (text) {
-            console.log(text);
-        }
-        // const model = genAI.languageModel('models/gemini-pro')
-        // const result = await model.doGenerate({
-        //     inputFormat: 'prompt',
-        //     prompt: [prompt]
-        // });
-        // const colorNames = result.response.text().trim().split(',').map(name => name.trim());
-        //
-        // // Assign names to shades
-        // Object.keys(shades).forEach((shade, index) => {
-        //     shades[shade].name = colorNames[index] || 'Unnamed';
-        // });
-        //
-        // return shades;
+        // const { text } = await generateText({
+        //     model: anthropic('claude-3-5-sonnet-20240620'),
+        //     prompt
+        // })
+        // return {text};
+        return { text: choices[0].message.content || ''};
     } catch (error) {
-        console.error('Error generating color names:', error);
-        return Object.fromEntries(
-            Object.entries(shades).map(([shade, { hex }]: any) => [shade, { hex, name: 'Unnamed' }])
-        );
+        console.error('Error generating color name:', error);
+        throw new Error('Failed to generate color name');
     }
 }
